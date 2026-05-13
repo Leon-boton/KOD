@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Генератор CODE-128</title>
+
+<script src="https://unpkg.com/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    padding: 20px;
+}
+
+input {
+    width: 350px;
+    font-size: 18px;
+    text-align: center;
+}
+
+button {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#barcode {
+    margin-top: 20px;
+}
+
+/* СКРЫТОЕ ВИДЕО */
+#videoBlock {
+    display: none;
+    margin-top: 30px;
+}
+
+video {
+    max-width: 400px;
+    border: 1px solid #ccc;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Генератор штрих-кода CODE-128 (для паллет)</h2>
+
+<label>Введи код (000460):</label><br><br>
+
+<input id="inputCode" type="text">
+<br>
+
+<button onclick="makeCode128()">Сделать штрих-код</button>
+
+<h3>Результат:</h3>
+<p id="result"></p>
+
+<svg id="barcode"></svg>
+
+<!-- БЛОК С ВИДЕО (СКРЫТ) -->
+<div id="videoBlock">
+    <video id="myVideo" muted loop controls>
+        <source src="C:\Users\User\Desktop\ОЛЕСЯ\vidos\15336101579497.mp4" type="video/mp4">
+    </video>
+</div>
+
+<script>
+function makeCode128() {
+    let code = document.getElementById("inputCode").value.trim();
+
+    if (code.length === 0) {
+        alert("Введите код!");
+        return;
+    }
+
+    document.getElementById("result").innerText = "Код: " + code;
+
+    JsBarcode("#barcode", code, {
+        format: "CODE128",
+        lineColor: "black",
+        width: 4,
+        height: 140,
+        displayValue: true
+    });
+}
+</script>
+
+</body>
+</html>
